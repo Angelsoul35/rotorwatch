@@ -1,0 +1,39 @@
+[project]
+name = "rotorwatch"
+version = "1.0.0"
+description = "Predictive maintenance for rotating equipment: Remaining Useful Life (RUL) estimation from sensor data, validated on the NASA C-MAPSS turbofan run-to-failure dataset with unit-disjoint evaluation."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Angelo David Padilla Romero" }]
+
+dependencies = [
+  "numpy>=2.1",
+  "pandas>=2.2",
+  "scikit-learn>=1.5",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "pytest-cov>=6.0", "ruff>=0.8"]
+
+[project.scripts]
+rotorwatch = "rotorwatch.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["rotorwatch*"]
+
+[tool.pytest.ini_options]
+addopts = "-q --strict-markers"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "W"]
+ignore = ["B008"]
